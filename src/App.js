@@ -1,23 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
-
+import "./App.css";
+import Modall from "./Modal";
+import Table from "./Table";
+import { useState } from "react";
+import {useDispatch} from 'react-redux'
+import { inputInitial } from "./store/action";
 function App() {
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const dispatch=useDispatch()
+  const handleShow = () => {
+    setShow(true);
+    dispatch(inputInitial())
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Modall
+        show={show}
+        setShow={setShow}
+        handleClose={handleClose}
+        handleShow={handleShow}
+      />
+      <Table show={show} setShow={setShow} />
     </div>
   );
 }
